@@ -22,7 +22,7 @@ This project involved capturing and analyzing network traffic to identify potent
 | **Wireshark** | Network traffic capture and analysis |
 | **Kali Linux** | Simulated attack traffic (port scans, brute force attempts) |
 | **Nmap** | Network scanning to simulate external attacks |
-| **Scapy (Python)** | Custom packet crafting (optional) |
+| **Scapy (Python)** | Custom packet crafting |
 
 ---
 
