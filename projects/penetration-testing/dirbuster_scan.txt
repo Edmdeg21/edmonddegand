@@ -1,1 +1,7 @@
+/admin (Status: 200)
+/backup (Status: 200)
+/uploads (Status: 403)
+/wp-admin (Status: 301)
+/login.php (Status: 200)
+/debug.log (Status: 200)
 
