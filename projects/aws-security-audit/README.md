@@ -2,28 +2,46 @@
 
 ## 📄 Project Overview
 
-This project involved conducting a comprehensive **security audit** of an AWS environment to assess configurations, access controls, and overall cloud security posture. The goal was to identify misconfigurations, excessive permissions, and potential exposure risks.
+This project involved conducting a comprehensive **security audit** of an AWS environment, focusing on identifying **misconfigurations**, **overly permissive policies**, and **potential security risks** across AWS services like IAM, S3, CloudTrail, and more.
+
+The goal was to assess the environment against **AWS security best practices**, including the **AWS Well-Architected Framework** and **CIS AWS Foundations Benchmark**.
 
 ---
 
 ## 🎯 Objectives
 
-- Review **IAM policies**, roles, and permissions.
-- Analyze **S3 bucket policies** for public exposure.
-- Review **CloudTrail logs** for suspicious or unauthorized activity.
-- Assess compliance with **AWS Well-Architected Framework** and **CIS AWS Foundations Benchmark**.
+- Review **IAM policies, roles, and permissions**.
+- Check **S3 bucket permissions, encryption status, and public access policies**.
+- Review **CloudTrail configuration and coverage across all regions**.
+- Identify unused or excessively permissive **IAM users, roles, and policies**.
+- Check for active findings in **AWS Security Hub**.
 
 ---
 
-## 🔧 Tools Used
+## 🔧 Tools & Technologies Used
 
-| Tool/Service | Purpose |
+| Tool | Purpose |
 |---|---|
-| **AWS CLI** | Manual configuration and policy review |
-| **AWS Security Hub** | Consolidated view of security findings |
-| **AWS Config** | Continuous monitoring of resource configurations |
-| **CloudTrail** | Monitoring and analysis of user and service activity |
-| **Python (Boto3)** | Automated audits for public S3 buckets (sample script included) |
+| **AWS CLI** | Direct configuration review and evidence gathering |
+| **AWS Security Hub** | Consolidated view of security and compliance findings |
+| **AWS Config** | Continuous monitoring and rule-based compliance checking |
+| **CloudTrail** | Review of logged API calls and user activity |
+| **IAM Access Analyzer** | Detect overly permissive policies and external access |
+| **ScoutSuite** | Automated AWS security scanning tool |
+| **Python (Boto3)** | Scripted review of bucket permissions (sample script included) |
+
+---
+
+## 🔬 Key Findings
+
+| Finding | Description | Severity |
+|---|---|---|
+| Public S3 Buckets | Multiple S3 buckets allowed **public read access** | 🔴 High |
+| Overly Permissive IAM Policies | Some IAM users had **AdministratorAccess** attached directly | 🔴 High |
+| Missing S3 Encryption | Several buckets were not encrypted at rest | 🟠 Medium |
+| Incomplete CloudTrail Coverage | Not all regions had active trails | 🟠 Medium |
+| Root User Without MFA | Root account did not enforce MFA | 🔴 High |
+| Stale IAM Keys | Multiple IAM users had access keys older than 90 days | 🟡 Low |
 
 ---
 
@@ -31,15 +49,18 @@ This project involved conducting a comprehensive **security audit** of an AWS en
 
 | File | Description |
 |---|---|
-| `aws-audit-report.pdf` | Full audit report summarizing findings and recommendations |
-| `aws-cli-commands.txt` | All AWS CLI commands used during the audit |
-| `boto3-public-bucket-checker.py` | Python script to check for public S3 buckets |
-| `screenshot-securityhub.png` | Screenshot showing findings in AWS Security Hub |
+| `aws-audit-report.pdf` | Full security audit report with detailed findings and evidence |
+| `aws-cli-commands.txt` | Complete list of AWS CLI commands used to gather evidence |
+| `boto3-public-bucket-checker.py` | Python script to programmatically check for public S3 buckets |
+| `screenshot-securityhub.png` | Screenshot showing findings in AWS Security Hub dashboard |
 
 ---
 
-## 📝 Key AWS CLI Commands Used
+## 📝 Sample AWS CLI Commands Used
 
-### Check S3 Bucket Policies
+### Review IAM Users and Policies
 ```bash
-aws s3api get-bucket-acl --bucket example-bucket
+aws iam list-users
+aws iam list-policies --scope Local
+aws iam list-attached-user-policies --user-name ExampleUser
+
