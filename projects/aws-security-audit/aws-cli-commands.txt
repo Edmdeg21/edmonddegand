@@ -1,1 +1,7 @@
+Sample AWS CLI commands used for auditing the environment
+
+aws iam list-users
+aws iam list-policies --scope Local
+aws s3api get-bucket-acl --bucket example-bucket
+aws cloudtrail describe-trails
 
