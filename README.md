@@ -55,7 +55,7 @@ I’m fluent in both **English** and **French**, and I’m always eager to apply
 
 - 📍 **Location:** Miami, FL
 - 📧 **Email:** edmonddeg@gmail.com
-- 🌐 **LinkedIn:** [linkedin.com/in/edmonddegand](https://linkedin.com/in/edmonddegand)
+- 🌐 **LinkedIn:** [linkedin.com/in/edmonddegand](https://linkedin.com/in/edmond-degand-3524ab284)
 
 ---
 
