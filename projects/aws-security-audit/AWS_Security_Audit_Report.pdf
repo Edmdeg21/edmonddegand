@@ -1,0 +1,60 @@
+1. Executive Summary
+
+This AWS Security Audit assessed the overall security posture of a simulated AWS environment, focusing on critical services such as IAM, S3, CloudTrail, and Security Hub. The goal was to identify misconfigurations, overly permissive access, and lack of security controls compared to AWS best practices and the CIS AWS Foundations Benchmark.
+
+The audit identified several critical issues including publicly accessible S3 buckets, excessive IAM privileges, and lack of multi-factor authentication (MFA) enforcement for the root account. Immediate remediation is recommended.
+2. Scope and Methodology
+Services Reviewed
+
+    Identity and Access Management (IAM)
+    Simple Storage Service (S3)
+    CloudTrail
+    Security Hub
+
+Evidence Collection Methods
+
+    AWS CLI commands
+    Manual review of AWS Console configurations
+    Review of AWS Security Hub findings
+    Python (Boto3) automation to check S3 bucket permissions
+
+3. Key Findings
+Finding	Description	Severity
+Public S3 Buckets	Multiple buckets had public read permissions.	🔴 High
+Overly Permissive IAM Policies	Several users had AdministratorAccess directly attached.	🔴 High
+Root Account Without MFA	Root account login allowed without MFA.	🔴 High
+Missing S3 Encryption	Some buckets lacked encryption at rest.	🟠 Medium
+Incomplete CloudTrail Coverage	CloudTrail was not enabled in all regions.	🟠 Medium
+Stale IAM Access Keys	Some access keys were older than 90 days.	🟡 Low
+4. Evidence Collection Process
+
+The following AWS CLI commands were used to collect evidence:
+IAM Review
+
+aws iam list-users
+aws iam list-attached-user-policies --user-name ExampleUser
+
+S3 Review
+
+aws s3api get-bucket-acl --bucket example-bucket
+aws s3api get-bucket-policy --bucket example-bucket
+
+CloudTrail Review
+
+aws cloudtrail describe-trails
+aws cloudtrail get-event-selectors --trail-name ExampleTrail
+
+5. Recommendations
+
+    ✅ Enforce least privilege principle for all IAM users, groups, and roles.
+    ✅ Require multi-factor authentication (MFA) for all IAM users, especially the root account.
+    ✅ Ensure all S3 buckets are private unless explicitly required to be public.
+    ✅ Apply encryption at rest for all S3 buckets and EBS volumes.
+    ✅ Enable CloudTrail log file validation to ensure logs are tamper-proof.
+    ✅ Ensure CloudTrail covers all AWS regions.
+    ✅ Regularly review and remove unused IAM users and access keys.
+    ✅ Enable AWS Security Hub to continuously monitor security and compliance.
+
+6. Conclusion
+
+This AWS Security Audit revealed multiple critical vulnerabilities that could lead to data breaches, compromised credentials, and regulatory non-compliance. By applying the recommendations above and maintaining continuous monitoring using AWS Security Hub and AWS Config, the AWS environment can achieve a significantly improved security posture.
